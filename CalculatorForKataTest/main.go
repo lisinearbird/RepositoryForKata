@@ -88,11 +88,8 @@ func calculate(input string) (result string, err error) {
 			return "", err
 		}
 
-		if res < 0 {
-			return "", fmt.Errorf("в римской системе нет отрицательных чисел")
-		}
-		if res == 0 {
-			return "nulla", nil
+		if res <= 0 {
+			return "", fmt.Errorf("в римской системе счисления нет нуля и отрицательных чисел")
 		}
 
 		return intToRoman(res), nil

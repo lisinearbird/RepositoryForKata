@@ -83,11 +83,19 @@ func calculate(input string) (result string, err error) {
 		if err != nil {
 			return "", err
 		}
-		rez, err := execute(a, b, tokens[1])
+		res, err := execute(a, b, tokens[1])
 		if err != nil {
 			return "", err
 		}
-		return intToRoman(rez), nil
+
+		if res < 0 {
+			return "", fmt.Errorf("в римской системе нет отрицательных чисел")
+		}
+		if res == 0 {
+			return "nulla", nil
+		}
+
+		return intToRoman(res), nil
 	}
 
 	if isArabic {
@@ -99,11 +107,11 @@ func calculate(input string) (result string, err error) {
 		if err != nil {
 			return "", err
 		}
-		rez, err := execute(a, b, tokens[1])
+		res, err := execute(a, b, tokens[1])
 		if err != nil {
 			return "", err
 		}
-		return strconv.Itoa(rez), nil
+		return strconv.Itoa(res), nil
 	}
 
 	return "", fmt.Errorf("неверный формат выражения")
